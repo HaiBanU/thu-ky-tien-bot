@@ -80,10 +80,8 @@ def create_reminder_message(session_time: datetime) -> str:
     💰 Chuẩn bị sẵn vốn theo đúng kỷ luật.
 
 👇   <b>VÀO NHÓM NHẬN LỆNH TẠI ĐÂY</b>   👇
-
 <a href="{config.MAIN_GROUP_LINK}"><b>{link_text}</b></a>
-
-
+☝️                                       ☝️
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
 💬  <i>Cần hỗ trợ hãy liên hệ <b>BOSS: @BossMinhHieuu</b></i>
 ━━━━━━━━━━━━━━━━━━━━━━━━━━
