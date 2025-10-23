@@ -24,10 +24,16 @@ def run_web_server():
     port = int(os.environ.get('PORT', 8080))
     app.run(host='0.0.0.0', port=port)
 
-# --- PHẦN MÃ NGUỒN BOT (KHÔNG THAY ĐỔI) ---
+# --- PHẦN MÃ NGUỒN BOT ---
 
-# Cấu hình logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# <<< THAY ĐỔI: Cấu hình logging chi tiết hơn >>>
+logging.basicConfig(
+    level=logging.INFO, 
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler() # In log ra console của Render
+    ]
+)
 
 INTRODUCTION_MESSAGES = [
     f"""<b>💎   𝗞𝗬̉ 𝗟𝗨𝗔̣̂𝗧 𝗟𝗔̀ 𝗦𝗨̛́𝗖 𝗠𝗔̣𝗡𝗛   💎</b>
@@ -133,7 +139,7 @@ async def send_reminder_video(bot: Bot, session_time: datetime):
             )
         logging.info(f"🧚‍♀️  Đã gửi video nhắc nhở ca {session_time.strftime('%H:%M')}.")
     except FileNotFoundError:
-        logging.warning(f"Không tìm thấy file VIDEO nhắc nhở. Gửi tạm tin nhắn văn bản.")
+        logging.warning(f"Không tìm thấy file VIDEO nhắc nhở tại '{config.REMINDER_VIDEO_PATH}'. Gửi tạm tin nhắn văn bản.")
         sent_message = await send_simple_message(bot, caption, return_message=True)
     except Exception as e:
         logging.error(f"❌ Lỗi khi gửi video nhắc nhở: {e}")
@@ -160,7 +166,7 @@ async def send_capital_division_photo(bot: Bot):
             )
         logging.info("💰  Đã gửi ảnh hướng dẫn chia vốn.")
     except FileNotFoundError:
-        logging.warning(f"Không tìm thấy file ẢNH chia vốn. Bỏ qua.")
+        logging.warning(f"Không tìm thấy file ẢNH chia vốn tại '{config.CAPITAL_DIVISION_IMAGE_PATH}'. Bỏ qua.")
     except Exception as e:
         logging.error(f"❌ Lỗi khi gửi ảnh chia vốn: {e}")
 
@@ -176,7 +182,7 @@ async def send_introduction_video(bot: Bot):
             )
         logging.info("🎬  Đã gửi video giới thiệu nhóm.")
     except FileNotFoundError:
-        logging.warning(f"Không tìm thấy file VIDEO giới thiệu. Gửi tạm tin nhắn văn bản.")
+        logging.warning(f"Không tìm thấy file VIDEO giới thiệu tại '{config.INTRODUCTION_VIDEO_PATH}'. Gửi tạm tin nhắn văn bản.")
         await send_simple_message(bot, caption)
     except Exception as e:
         logging.error(f"❌ Lỗi khi gửi video giới thiệu: {e}")
@@ -187,60 +193,76 @@ async def handle_session_reminder(bot: Bot, session_time: datetime):
     await send_capital_division_photo(bot)
 
 async def main_loop():
-    if not all([config.SECRETARY_TELEGRAM_TOKEN, config.SECRETARY_CHAT_ID]):
-        logging.critical("❌ Thiếu TOKEN hoặc CHAT_ID. Vui lòng kiểm tra biến môi trường.")
-        return
+    # <<< THÊM MỚI: Bọc toàn bộ logic bot trong try...except để bắt lỗi >>>
+    try:
+        if not all([config.SECRETARY_TELEGRAM_TOKEN, config.SECRETARY_CHAT_ID]):
+            logging.critical("❌ Thiếu TOKEN hoặc CHAT_ID. Vui lòng kiểm tra biến môi trường.")
+            return
 
-    bot = Bot(token=config.SECRETARY_TELEGRAM_TOKEN)
-    logging.info("🚀 Bot Thư Ký Tiên (v4.1 - Deploy) đã khởi động! Hoạt động từ 06:50 đến 22:00.")
-    
-    sent_flags = { 'last_reminder_minute': -1, 'last_intro_hour': -1, 'today': date.today(), 'is_sleeping_logged': False }
-    start_time = time(6, 50)
-    end_time_hour = 22
-
-    while True:
-        now = datetime.now(config.VN_TZ)
-        is_sleeping_time = now.time() < start_time or now.hour > end_time_hour
+        bot = Bot(token=config.SECRETARY_TELEGRAM_TOKEN)
+        # <<< THÊM MỚI: Kiểm tra token hợp lệ bằng cách lấy thông tin bot >>>
+        bot_info = await bot.get_me()
+        logging.info(f"✅ Token hợp lệ. Bot '{bot_info.full_name}' đã sẵn sàng.")
         
-        if is_sleeping_time:
-            if not sent_flags['is_sleeping_logged']:
-                logging.info(f"🌙 Bot đang trong giờ nghỉ ngơi. Sẽ hoạt động lại lúc {start_time.strftime('%H:%M')}.")
-                sent_flags['is_sleeping_logged'] = True
+        logging.info("🚀 Bot Thư Ký Tiên (v4.1 - Deploy) đã khởi động! Hoạt động từ 06:50 đến 22:00.")
+        
+        sent_flags = { 'last_reminder_minute': -1, 'last_intro_hour': -1, 'today': date.today(), 'is_sleeping_logged': False }
+        start_time = time(6, 50)
+        end_time_hour = 22
+
+        while True:
+            now = datetime.now(config.VN_TZ)
+            is_sleeping_time = now.time() < start_time or now.hour > end_time_hour
+            
+            if is_sleeping_time:
+                if not sent_flags['is_sleeping_logged']:
+                    logging.info(f"🌙 Bot đang trong giờ nghỉ ngơi. Sẽ hoạt động lại lúc {start_time.strftime('%H:%M')}.")
+                    sent_flags['is_sleeping_logged'] = True
+                if now.date() != sent_flags['today']:
+                    sent_flags = { 'last_reminder_minute': -1, 'last_intro_hour': -1, 'today': now.date(), 'is_sleeping_logged': True }
+                    logging.info(f"☀️  Đã qua ngày mới {now.strftime('%d/%m/%Y')}! Đã reset trạng thái.")
+                await asyncio.sleep(60)
+                continue
+            
+            if sent_flags['is_sleeping_logged']:
+                sent_flags['is_sleeping_logged'] = False
+                logging.info("☀️  Bot bắt đầu ca làm việc!")
+
             if now.date() != sent_flags['today']:
-                sent_flags = { 'last_reminder_minute': -1, 'last_intro_hour': -1, 'today': now.date(), 'is_sleeping_logged': True }
-                logging.info(f"☀️  Đã qua ngày mới {now.strftime('%d/%m/%Y')}! Đã reset trạng thái.")
-            await asyncio.sleep(60)
-            continue
-        
-        if sent_flags['is_sleeping_logged']:
-            sent_flags['is_sleeping_logged'] = False
-            logging.info("☀️  Bot bắt đầu ca làm việc!")
+                sent_flags = { 'last_reminder_minute': -1, 'last_intro_hour': -1, 'today': now.date(), 'is_sleeping_logged': False }
+                logging.info(f"☀️  Chào ngày mới {now.strftime('%d/%m/%Y')}! Đã reset trạng thái.")
 
-        if now.date() != sent_flags['today']:
-            sent_flags = { 'last_reminder_minute': -1, 'last_intro_hour': -1, 'today': now.date(), 'is_sleeping_logged': False }
-            logging.info(f"☀️  Chào ngày mới {now.strftime('%d/%m/%Y')}! Đã reset trạng thái.")
+            if now.hour == 7 and 'morning_sent' not in sent_flags:
+                await send_simple_message(bot, create_good_morning_message())
+                sent_flags['morning_sent'] = True
+            if now.hour in [8, 12, 16, 20] and now.hour != sent_flags['last_intro_hour']:
+                await send_introduction_video(bot)
+                sent_flags['last_intro_hour'] = now.hour
+            if now.hour == 22 and 'night_sent' not in sent_flags:
+                await send_simple_message(bot, create_good_night_message())
+                sent_flags['night_sent'] = True
 
-        if now.hour == 7 and 'morning_sent' not in sent_flags:
-            await send_simple_message(bot, create_good_morning_message())
-            sent_flags['morning_sent'] = True
-        if now.hour in [8, 12, 16, 20] and now.hour != sent_flags['last_intro_hour']:
-            await send_introduction_video(bot)
-            sent_flags['last_intro_hour'] = now.hour
-        if now.hour == 22 and 'night_sent' not in sent_flags:
-            await send_simple_message(bot, create_good_night_message())
-            sent_flags['night_sent'] = True
-        is_reminder_time = (now.minute + 3) % config.SESSION_INTERVAL_MINUTES == 0
-        if is_reminder_time and now.minute != sent_flags['last_reminder_minute']:
-            sent_flags['last_reminder_minute'] = now.minute
-            session_start_time = now.replace(second=0, microsecond=0) + timedelta(minutes=3)
-            asyncio.create_task(handle_session_reminder(bot, session_start_time))
-        await asyncio.sleep(5)
+            is_reminder_time = (now.minute + 3) % config.SESSION_INTERVAL_MINUTES == 0
+            if is_reminder_time and now.minute != sent_flags['last_reminder_minute']:
+                sent_flags['last_reminder_minute'] = now.minute
+                session_start_time = now.replace(second=0, microsecond=0) + timedelta(minutes=3)
+                asyncio.create_task(handle_session_reminder(bot, session_start_time))
+            
+            await asyncio.sleep(5)
+    
+    except Exception as e:
+        # <<< THÊM MỚI: In ra lỗi nghiêm trọng nếu có >>>
+        logging.critical(f"❌ LỖI NGHIÊM TRỌNG TRONG VÒNG LẶP CHÍNH CỦA BOT: {e}", exc_info=True)
+
 
 # --- KHỞI ĐỘNG CẢ BOT VÀ WEB SERVER ---
 if __name__ == "__main__":
+    logging.info("▶️  Bắt đầu chạy script...")
+    
     # Chạy bot trong một luồng (thread) riêng để không chặn web server
     bot_thread = Thread(target=lambda: asyncio.run(main_loop()))
     bot_thread.start()
     
     # Chạy web server trong luồng chính để Render nhận diện
+    logging.info("🌐 Web server đang khởi động...")
     run_web_server()
