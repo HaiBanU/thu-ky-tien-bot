@@ -53,11 +53,12 @@ Việc của bạn chỉ là:
    ✅  <b>Sẵn sàng vào lệnh đúng thời điểm.</b>""",
 ]
 
+# <<< THAY ĐỔI: Thêm thông tin liên hệ Boss vào tin nhắn nhắc nhở >>>
 def create_reminder_message(session_time: datetime) -> str:
     time_str = session_time.strftime('%H:%M')
     reminders = [
         "Một cái đầu lạnh sẽ tạo nên một chiến thắng lớn!",
-        "Kỷ luật là chì khóa vàng dẫn đến thành công!",
+        "Kỷ luật là chìa khóa vàng dẫn đến thành công!",
         "Cùng nhau tạo nên một ca kéo thật bùng nổ nào!",
         "Tập trung, quyết đoán và chiến thắng!",
         "Thị trường đang chờ đợi những nhà vô địch!"
@@ -81,7 +82,11 @@ def create_reminder_message(session_time: datetime) -> str:
 👇   <b>VÀO NHÓM NHẬN LỆNH TẠI ĐÂY</b>   👇
 
 <a href="{config.MAIN_GROUP_LINK}"><b>{link_text}</b></a>
-<a href="{config.MAIN_GROUP_LINK}"><b>{config.MAIN_GROUP_LINK}</b></a>
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬  <i>Cần hỗ trợ hãy liên hệ <b>BOSS: @BossMinhHieuu</b></i>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 🪄  <i>Lời nhắn nhủ: {random.choice(reminders)}</i>
 """
@@ -103,12 +108,17 @@ Hẹn gặp lại cả nhà vào sáng mai! ❤️"""
 def create_introduction_message() -> str:
     return random.choice(INTRODUCTION_MESSAGES)
 
+# <<< THAY ĐỔI: Thêm thông tin liên hệ Boss vào tin nhắn chia vốn >>>
 def create_capital_division_message() -> str:
     return """💰💰   𝗕𝗔̉𝗡𝗚 𝗖𝗛𝗜𝗔 𝗩𝗢̂́𝗡 𝗧𝗜𝗘̂𝗨 𝗖𝗛𝗨𝗔̂̉𝗡 (𝗟𝗘̣̂𝗡𝗛 𝟭𝟬%)  💰 💰
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 <i>Để đảm bảo an toàn và tối ưu lợi nhuận, anh em vui lòng tuân thủ nghiêm ngặt cách đi vốn theo bảng hướng dẫn.</i>
 
 ‼️  <b>LƯU Ý:</b> Vào lệnh đúng <b>10%</b> trên tổng số vốn của bạn.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+💬  <i>Cần hỗ trợ hãy liên hệ <b>BOSS: @BossMinhHieuu</b></i>
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 <b>Kỷ luật là chìa khóa để chiến thắng!</b>"""
 
@@ -126,6 +136,7 @@ async def send_simple_message(bot: Bot, message: str, return_message: bool = Fal
         logging.error(f"❌ Lỗi khi gửi tin nhắn đơn giản: {e}")
     return None
 
+# <<< THAY ĐỔI: Thêm logic gỡ ghim tin nhắn sau 5 phút >>>
 async def send_reminder_video(bot: Bot, session_time: datetime):
     caption = create_reminder_message(session_time)
     sent_message = None
@@ -151,8 +162,18 @@ async def send_reminder_video(bot: Bot, session_time: datetime):
                 message_id=sent_message.message_id
             )
             logging.info(f"📌  Đã ghim tin nhắn nhắc nhở (ID: {sent_message.message_id}).")
+
+            # --- THÊM MỚI: Lên lịch gỡ ghim sau 5 phút (300 giây) ---
+            await asyncio.sleep(300) 
+            await bot.unpin_chat_message(
+                chat_id=config.SECRETARY_CHAT_ID,
+                message_id=sent_message.message_id
+            )
+            logging.info(f"ℹ️  Đã gỡ ghim tin nhắn nhắc nhở (ID: {sent_message.message_id}).")
+            
         except Exception as e:
-            logging.error(f"❌ Không thể ghim tin nhắn: {e}. Vui lòng kiểm tra quyền của bot.")
+            logging.error(f"❌ Không thể ghim/gỡ ghim tin nhắn: {e}. Vui lòng kiểm tra quyền của bot.")
+
 
 async def send_capital_division_photo(bot: Bot):
     caption = create_capital_division_message()
@@ -187,9 +208,11 @@ async def send_introduction_video(bot: Bot):
     except Exception as e:
         logging.error(f"❌ Lỗi khi gửi video giới thiệu: {e}")
 
+# <<< THAY ĐỔI: Tạo task riêng cho việc ghim/gỡ ghim để không block các tác vụ khác >>>
 async def handle_session_reminder(bot: Bot, session_time: datetime):
-    await send_reminder_video(bot, session_time)
-    await asyncio.sleep(1)
+    # Việc ghim và chờ để gỡ ghim nên chạy riêng biệt
+    asyncio.create_task(send_reminder_video(bot, session_time))
+    await asyncio.sleep(1) # Chờ 1 giây để tin nhắn chia vốn gửi sau
     await send_capital_division_photo(bot)
 
 async def main_loop():
@@ -204,7 +227,7 @@ async def main_loop():
         bot_info = await bot.get_me()
         logging.info(f"✅ Token hợp lệ. Bot '{bot_info.full_name}' đã sẵn sàng.")
         
-        logging.info("🚀 Bot Thư Ký Tiên (v4.1 - Deploy) đã khởi động! Hoạt động từ 06:50 đến 22:00.")
+        logging.info("🚀 Bot Thư Ký Tiên (v4.2 - Deploy) đã khởi động! Hoạt động từ 06:50 đến 22:00.")
         
         sent_flags = { 'last_reminder_minute': -1, 'last_intro_hour': -1, 'today': date.today(), 'is_sleeping_logged': False }
         start_time = time(6, 50)
@@ -231,6 +254,10 @@ async def main_loop():
             if now.date() != sent_flags['today']:
                 sent_flags = { 'last_reminder_minute': -1, 'last_intro_hour': -1, 'today': now.date(), 'is_sleeping_logged': False }
                 logging.info(f"☀️  Chào ngày mới {now.strftime('%d/%m/%Y')}! Đã reset trạng thái.")
+                # Reset cờ chào buổi sáng/tối khi qua ngày mới
+                sent_flags.pop('morning_sent', None)
+                sent_flags.pop('night_sent', None)
+
 
             if now.hour == 7 and 'morning_sent' not in sent_flags:
                 await send_simple_message(bot, create_good_morning_message())
@@ -246,7 +273,8 @@ async def main_loop():
             if is_reminder_time and now.minute != sent_flags['last_reminder_minute']:
                 sent_flags['last_reminder_minute'] = now.minute
                 session_start_time = now.replace(second=0, microsecond=0) + timedelta(minutes=3)
-                asyncio.create_task(handle_session_reminder(bot, session_start_time))
+                # <<< THAY ĐỔI: Chuyển sang hàm handle_session_reminder đã được cập nhật >>>
+                await handle_session_reminder(bot, session_start_time)
             
             await asyncio.sleep(5)
     
