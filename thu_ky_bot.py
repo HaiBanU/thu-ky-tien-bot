@@ -109,7 +109,7 @@ def create_introduction_message() -> str:
 # <<< THAY ĐỔI: Thêm thông tin liên hệ Boss vào tin nhắn chia vốn >>>
 def create_capital_division_message() -> str:
     return """💰💰   𝗕𝗔̉𝗡𝗚 𝗖𝗛𝗜𝗔 𝗩𝗢̂́𝗡 𝗧𝗜𝗘̂𝗨 𝗖𝗛𝗨𝗔̂̉𝗡 (𝗟𝗘̣̂𝗡𝗛 𝟭𝟬%)  💰 💰
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━
 <i>Để đảm bảo an toàn và tối ưu lợi nhuận, anh em vui lòng tuân thủ nghiêm ngặt cách đi vốn theo bảng hướng dẫn.</i>
 
 ‼️  <b>LƯU Ý:</b> Vào lệnh đúng <b>10%</b> trên tổng số vốn của bạn.
