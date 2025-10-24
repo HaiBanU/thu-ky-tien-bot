@@ -60,8 +60,8 @@ SESSION_SCHEDULE = [
 ]
 
 INTRODUCTION_MESSAGES = [
-    f"""<b>💎   𝗞𝗬̉ 𝗟𝗨𝗔̣̂𝗧 𝗟𝗔̀ 𝗦𝗨̛́𝗖 𝗠𝗔̣𝗡𝗛   💎</b>
-━━━━━━━━━━━━━━
+    f"""<b>💎𝗞𝗬̉ 𝗟𝗨𝗔̣̂𝗧 𝗟𝗔̀ 𝗦𝗨̛́𝗖 𝗠𝗔̣𝗡𝗛💎</b>
+━━━━━━━━━━━━━
 <i>Thị trường luôn biến động, nhưng kỷ luật là thứ giúp chúng ta đứng vững. Luôn nhớ nguyên tắc vàng:</i>
 
 🎯  <b>Chốt lãi đúng mục tiêu.</b>
@@ -69,7 +69,7 @@ INTRODUCTION_MESSAGES = [
 
 Cùng nhau, chúng ta sẽ đi trên con đường dài và an toàn!""",
     f"""<b>🤝   Đ𝗢̂̀𝗡𝗚 𝗛𝗔̀𝗡𝗛 𝗖𝗨̀𝗡𝗚 𝗖𝗛𝗨𝗬𝗘̂𝗡 𝗚𝗜𝗔   🤝</b>
-━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━
 <i>Bạn không hề đơn độc! Luôn có Boss và đội ngũ hỗ trợ theo sát từng phiên. Hãy tin tưởng vào kinh nghiệm và tín hiệu được đưa ra.</i>
 
 Việc của bạn chỉ là:
@@ -88,9 +88,9 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
         "Tập trung, quyết đoán và chiến thắng!",
         "Thị trường đang chờ đợi những nhà vô địch!"
     ]
-    link_text = "【 💎   𝗡𝗛𝗔̂́𝗣 𝗩𝗔̀𝗢 Đ𝗔̂𝗬 Đ𝗘̂̉ 𝗧𝗛𝗔𝗠 𝗚𝗜𝗔   💎 】"
+    link_text = "💎𝗡𝗛𝗔̂́𝗣 𝗩𝗔̀𝗢 Đ𝗔̂𝗬 Đ𝗘̂̉ 𝗧𝗛𝗔𝗠 𝗚𝗜𝗔 💎"
     header = f"🚨   <b>BÁO HIỆU CA {ca_number} - NGÀY {today_str}</b>   🚨"
-    separator = "━━━━━━━━━━━━━━━━━━━━━"
+    separator = "━━━━━━━━━━━━━━━━━"
     return f"""
 <b><a href="{config.MAIN_GROUP_LINK}">️‍🔥 THÔNG BÁO KHẨN TỪ THƯ KÝ TIÊN ️‍🔥</a></b>
 {separator}
@@ -104,12 +104,12 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
     ✨ Ổn định chỗ ngồi, giữ tinh thần thoải mái.
     💰 Chuẩn bị sẵn vốn theo đúng kỷ luật.
 
-👇   <b>VÀO NHÓM NHẬN LỆNH TẠI ĐÂY</b>   👇
+👇 <b>VÀO NHÓM NHẬN LỆNH TẠI ĐÂY</b> 
 <a href="{config.MAIN_GROUP_LINK}"><b>{link_text}</b></a>
 
-━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 💬  <i>Cần hỗ trợ hãy liên hệ <b>BOSS: @BossMinhHieuu</b></i>
-━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 
 🪄  <i>Lời nhắn nhủ: {random.choice(reminders)}</i>
 """
@@ -117,14 +117,14 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
 # Hàm tạo các tin nhắn khác
 def create_good_morning_message() -> str:
     return """☀️✨   𝗖𝗛𝗔̀𝗢 𝗕𝗨𝗢̂̉𝗜 𝗦𝗔́𝗡𝗚, Đ𝗔̣𝗜 𝗚𝗜𝗔 Đ𝗜̀𝗡𝗛!   
-━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 <i>Thư Ký Tiên chúc cả nhà một ngày mới tràn đầy năng lượng, giao dịch thuận lợi và gặt hái thật nhiều thắng lợi!</i>
 
 Hãy cùng nhau bắt đầu một ngày thật rực rỡ nhé! 🚀"""
 
 def create_good_night_message() -> str:
     return """🌙✨   𝗖𝗛𝗨́𝗖 𝗖𝗔̉ 𝗡𝗛𝗔̀ 𝗡𝗚𝗨̉ 𝗡𝗚𝗢𝗡   
-━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 <i>Một ngày làm việc đã qua. Anh em hãy nghỉ ngơi thật tốt để lấy lại năng lượng cho những trận chiến ngày mai nhé.</i>
 
 Hẹn gặp lại cả nhà vào sáng mai! ❤️"""
@@ -134,14 +134,14 @@ def create_introduction_message() -> str:
 
 def create_capital_division_message() -> str:
     return """💰💰   𝗕𝗔̉𝗡𝗚 𝗖𝗛𝗜𝗔 𝗩𝗢̂́𝗡 𝗧𝗜𝗘̂𝗨 𝗖𝗛𝗨𝗔̂̉𝗡 (𝗟𝗘̣̂𝗡𝗛 𝟭𝟬%)  
-━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 <i>Để đảm bảo an toàn và tối ưu lợi nhuận, anh em vui lòng tuân thủ nghiêm ngặt cách đi vốn theo bảng hướng dẫn.</i>
 
 ‼️  <b>LƯU Ý:</b> Vào lệnh đúng <b>10%</b> trên tổng số vốn của bạn.
 
-━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 💬  <i>Cần hỗ trợ hãy liên hệ <b>BOSS: @BossMinhHieuu</b></i>
-━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 
 <b>Kỷ luật là chìa khóa để chiến thắng!</b>"""
 
@@ -152,7 +152,7 @@ def create_schedule_message() -> str:
         "Thành công đến từ kỷ luật. Hãy tuân thủ đúng khung giờ!",
     ]
     return f"""⏰   <b>KHUNG GIỜ LÀM VIỆC MINH HIẾU BCR</b>   
-━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━
 {random.choice(messages)}
 
 Cùng nhau chinh phục 100 ca mỗi ngày! 💪"""
