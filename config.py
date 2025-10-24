@@ -12,7 +12,7 @@ SECRETARY_CHAT_ID = os.getenv('SECRETARY_CHAT_ID')
 
 # --- CẤU HÌNH LIÊN KẾT & MEDIA ---
 # Đường dẫn tới các file media. Bot sẽ tìm các file này trong thư mục 'media'
-MAIN_GROUP_LINK = 'https://t.me/+KUseOkZUXL0wY2M1'
+MAIN_GROUP_LINK = 'https://t.me/+plP5cDMACO41NTQ1'
 REMINDER_VIDEO_PATH = os.path.join('media', 'reminder.mp4')
 INTRODUCTION_VIDEO_PATH = os.path.join('media', 'introduction.mp4')
 CAPITAL_DIVISION_IMAGE_PATH = os.path.join('media', 'chia_von.jpg')
