@@ -70,7 +70,7 @@ INTRODUCTION_MESSAGES = [
 Cùng nhau, chúng ta sẽ đi trên con đường dài và an toàn!""",
     f"""<b>🤝Đ𝑶̂̀𝑵𝑮 𝑯𝑨̀𝑵𝑯 𝑪𝑼̀𝑵𝑮 𝑪𝑯𝑼𝒀𝑬̂𝑵 𝑮𝑰𝑨🤝</b>
 ━━━━━━━━━━━━━━
-<i>Bạn không hề đơn độc! Luôn có Boss và đội ngũ hỗ trợ theo sát từng phiên. Hãy tin tưởng vào kinh nghiệm và tín hiệu được đưa ra.</i>
+<i>Bạn không hề đơn độc! Luôn có 𝓑𝓞𝓢𝓢 và đội ngũ hỗ trợ theo sát từng phiên. Hãy tin tưởng vào kinh nghiệm và tín hiệu được đưa ra.</i>
 
 Việc của bạn chỉ là:
    ✅  <b>Chuẩn bị vốn.</b>
@@ -108,7 +108,7 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
 <a href="{config.MAIN_GROUP_LINK}"><b>{link_text}</b></a>
 
 ━━━━━━━━━━━━━━━━
-💬  <i>Cần hỗ trợ hãy liên hệ <b>BOSS: @BossMinhHieuu</b></i>
+💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @𝓑𝓞𝓢𝓢MinhHieuu</b></i>
 ━━━━━━━━━━━━━━━━
 
 🪄  <i>Lời nhắn nhủ: {random.choice(reminders)}</i>
@@ -140,7 +140,7 @@ def create_capital_division_message() -> str:
 ‼️  <b>LƯU Ý:</b> Vào lệnh đúng <b>10%</b> trên tổng số vốn của bạn.
 
 ━━━━━━━━━━━━━━━━
-💬  <i>Cần hỗ trợ hãy liên hệ <b>BOSS: @BossMinhHieuu</b></i>
+💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @𝓑𝓞𝓢𝓢MinhHieuu</b></i>
 ━━━━━━━━━━━━━━━━
 
 <b>Kỷ luật là chìa khóa để chiến thắng!</b>"""
