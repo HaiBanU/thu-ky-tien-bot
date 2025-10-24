@@ -60,7 +60,7 @@ SESSION_SCHEDULE = [
 ]
 
 INTRODUCTION_MESSAGES = [
-    f"""<b>💎𝗞𝗬̉ 𝗟𝗨𝗔̣̂𝗧 𝗟𝗔̀ 𝗦𝗨̛́𝗖 𝗠𝗔̣𝗡𝗛💎</b>
+    f"""<b>💎𝓚𝓨̉ 𝓛𝓤𝓐̣̂𝓣 𝓛𝓐̀ 𝓢𝓤̛́𝓒 𝓜𝓐̣𝓝𝓗💎</b>
 ━━━━━━━━━━━━━
 <i>Thị trường luôn biến động, nhưng kỷ luật là thứ giúp chúng ta đứng vững. Luôn nhớ nguyên tắc vàng:</i>
 
@@ -68,7 +68,7 @@ INTRODUCTION_MESSAGES = [
 🎯  <b>Cắt lỗ không do dự.</b>
 
 Cùng nhau, chúng ta sẽ đi trên con đường dài và an toàn!""",
-    f"""<b>🤝   Đ𝗢̂̀𝗡𝗚 𝗛𝗔̀𝗡𝗛 𝗖𝗨̀𝗡𝗚 𝗖𝗛𝗨𝗬𝗘̂𝗡 𝗚𝗜𝗔   🤝</b>
+    f"""<b>🤝Đ𝑶̂̀𝑵𝑮 𝑯𝑨̀𝑵𝑯 𝑪𝑼̀𝑵𝑮 𝑪𝑯𝑼𝒀𝑬̂𝑵 𝑮𝑰𝑨🤝</b>
 ━━━━━━━━━━━━━━
 <i>Bạn không hề đơn độc! Luôn có Boss và đội ngũ hỗ trợ theo sát từng phiên. Hãy tin tưởng vào kinh nghiệm và tín hiệu được đưa ra.</i>
 
@@ -88,7 +88,7 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
         "Tập trung, quyết đoán và chiến thắng!",
         "Thị trường đang chờ đợi những nhà vô địch!"
     ]
-    link_text = "💎𝗡𝗛𝗔̂́𝗣 𝗩𝗔̀𝗢 Đ𝗔̂𝗬 Đ𝗘̂̉ 𝗧𝗛𝗔𝗠 𝗚𝗜𝗔 💎"
+    link_text = "💎𝓝𝓗𝓐̂́𝓝 𝓥𝓐̀𝓞 𝓓𝓔̂̉ 𝓣𝓗𝓐𝓜 𝓖𝓘𝓐💎"
     header = f"🚨   <b>BÁO HIỆU CA {ca_number} - NGÀY {today_str}</b>   🚨"
     separator = "━━━━━━━━━━━━━━━━━"
     return f"""
@@ -97,14 +97,14 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
 {header}
 {separator}
 
-🔔   Đếm ngược: Chỉ còn <b>𝟯 𝗽𝗵𝘂́𝘁</b> nữa là đến
+🔔   𝕯𝖊̂́𝖒 𝖓𝖌𝖚̛𝖔̛̣𝖈: Chỉ còn <b>𝟯 𝗽𝗵𝘂́𝘁</b> nữa là đến
 <b>CA KÉO TIẾP THEO</b> lúc <b>{time_str}</b>.
 
 <b>Anh em vui lòng:</b>
     ✨ Ổn định chỗ ngồi, giữ tinh thần thoải mái.
     💰 Chuẩn bị sẵn vốn theo đúng kỷ luật.
 
-👇 <b>VÀO NHÓM NHẬN LỆNH TẠI ĐÂY</b> 
+👇<b>𝓥𝓐̀𝓞 𝓝𝓗𝓞́𝓜 𝓝𝓗𝓐̣̂𝓝 𝓛𝓔̣̂𝓝𝓗 𝓣𝓐̣𝓘 𝓓𝓐̂𝓨</b> 
 <a href="{config.MAIN_GROUP_LINK}"><b>{link_text}</b></a>
 
 ━━━━━━━━━━━━━━━━
@@ -116,14 +116,14 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
 
 # Hàm tạo các tin nhắn khác
 def create_good_morning_message() -> str:
-    return """☀️✨   𝗖𝗛𝗔̀𝗢 𝗕𝗨𝗢̂̉𝗜 𝗦𝗔́𝗡𝗚, Đ𝗔̣𝗜 𝗚𝗜𝗔 Đ𝗜̀𝗡𝗛!   
+    return """☀️✨𝓒𝓗𝓐̀𝓞 𝓑𝓤𝓞̂̉𝓘 𝓢𝓐́𝓝𝓖 𝓓𝓐̣𝓘 𝓖𝓘𝓐 𝓓𝓘̀𝓝𝓗!   
 ━━━━━━━━━━━━━━━━
 <i>Thư Ký Tiên chúc cả nhà một ngày mới tràn đầy năng lượng, giao dịch thuận lợi và gặt hái thật nhiều thắng lợi!</i>
 
 Hãy cùng nhau bắt đầu một ngày thật rực rỡ nhé! 🚀"""
 
 def create_good_night_message() -> str:
-    return """🌙✨   𝗖𝗛𝗨́𝗖 𝗖𝗔̉ 𝗡𝗛𝗔̀ 𝗡𝗚𝗨̉ 𝗡𝗚𝗢𝗡   
+    return """🌙✨𝓒𝓗𝓤́𝓒 𝓒𝓐̉ 𝓝𝓗𝓐̀ 𝓝𝓖𝓤̉ 𝓝𝓖𝓞𝓝   
 ━━━━━━━━━━━━━━━━
 <i>Một ngày làm việc đã qua. Anh em hãy nghỉ ngơi thật tốt để lấy lại năng lượng cho những trận chiến ngày mai nhé.</i>
 
@@ -133,7 +133,7 @@ def create_introduction_message() -> str:
     return random.choice(INTRODUCTION_MESSAGES)
 
 def create_capital_division_message() -> str:
-    return """💰💰   𝗕𝗔̉𝗡𝗚 𝗖𝗛𝗜𝗔 𝗩𝗢̂́𝗡 𝗧𝗜𝗘̂𝗨 𝗖𝗛𝗨𝗔̂̉𝗡 (𝗟𝗘̣̂𝗡𝗛 𝟭𝟬%)  
+    return """💰💰 𝓑𝓐̉𝓝𝓖 𝓒𝓗𝓘𝓐 𝓥𝓞̂́𝓝 𝓒𝓗𝓤𝓐̂̉𝓝 (𝓛𝓔̣̂𝓝𝓗 𝟏𝟎%) 
 ━━━━━━━━━━━━━━━━
 <i>Để đảm bảo an toàn và tối ưu lợi nhuận, anh em vui lòng tuân thủ nghiêm ngặt cách đi vốn theo bảng hướng dẫn.</i>
 
@@ -155,7 +155,7 @@ def create_schedule_message() -> str:
 ━━━━━━━━━━━━━━━━
 {random.choice(messages)}
 
-Cùng nhau chinh phục 100 ca mỗi ngày! 💪"""
+𝕮𝖚̀𝖓𝖌 𝖓𝖍𝖆𝖚 𝖈𝖍𝖎𝖓𝖍 𝖕𝖍𝖚̣𝖈 𝟏𝟎𝟎 𝖈𝖆 𝖒𝖔̂̃𝖎 𝖓𝖌𝖆̀𝖞! 💪"""
 
 # Các hàm gửi tin nhắn (dạng text, video, photo)
 async def send_simple_message(bot: Bot, message: str, return_message: bool = False):
