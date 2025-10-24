@@ -108,7 +108,7 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
 <a href="{config.MAIN_GROUP_LINK}"><b>{link_text}</b></a>
 
 ━━━━━━━━━━━━━━━━
-💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @𝓑𝓞𝓢𝓢MinhHieuu</b></i>
+💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @BossMinhHieuu</b></i>
 ━━━━━━━━━━━━━━━━
 
 🪄  <i>Lời nhắn nhủ: {random.choice(reminders)}</i>
@@ -140,7 +140,7 @@ def create_capital_division_message() -> str:
 ‼️  <b>LƯU Ý:</b> Vào lệnh đúng <b>10%</b> trên tổng số vốn của bạn.
 
 ━━━━━━━━━━━━━━━━
-💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @𝓑𝓞𝓢𝓢MinhHieuu</b></i>
+💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @BossMinhHieuu</b></i>
 ━━━━━━━━━━━━━━━━
 
 <b>Kỷ luật là chìa khóa để chiến thắng!</b>"""
