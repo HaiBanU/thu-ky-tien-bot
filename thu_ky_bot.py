@@ -274,7 +274,7 @@ async def main_loop():
         bot_info = await bot.get_me()
         logging.info(f"✅ Token hợp lệ. Bot '{bot_info.full_name}' đã sẵn sàng.")
 
-        logging.info("🚀 Bot Thư Ký Tiên (v5.0 - 100 Ca) đã khởi động! Hoạt động từ 06:50 đến 23:35.")
+        logging.info("🚀 Bot Thư Ký Tiên (v5.0 - 100 Ca) đã khởi động! Hoạt động từ 06:50 đến 23:45.")
 
         sent_flags = {
             'last_reminder_minute': -1,
@@ -284,7 +284,7 @@ async def main_loop():
             'is_sleeping_logged': False
         }
         start_time = time(6, 50)
-        end_time = time(23, 35) # Giờ gửi tin chúc ngủ ngon
+        end_time = time(23, 45) # <-- THAY ĐỔI Ở ĐÂY: Giờ gửi tin chúc ngủ ngon
 
         while True:
             now = datetime.now(config.VN_TZ)
@@ -325,7 +325,7 @@ async def main_loop():
                 await send_simple_message(bot, create_good_morning_message())
                 sent_flags['morning_sent'] = True
 
-            # 2. Gửi tin chúc ngủ ngon (chỉ một lần lúc 23:35)
+            # 2. Gửi tin chúc ngủ ngon (chỉ một lần lúc 23:45)
             if now.time() >= end_time and 'night_sent' not in sent_flags:
                 await send_simple_message(bot, create_good_night_message())
                 sent_flags['night_sent'] = True
