@@ -61,7 +61,7 @@ SESSION_SCHEDULE = [
 
 INTRODUCTION_MESSAGES = [
     f"""<b>💎𝓚𝓨̉ 𝓛𝓤𝓐̣̂𝓣 𝓛𝓐̀ 𝓢𝓤̛́𝓒 𝓜𝓐̣𝓝𝓗💎</b>
-━━━━━━━━━━━━━
+━━━━━━━━━━━
 <i>Thị trường luôn biến động, nhưng kỷ luật là thứ giúp chúng ta đứng vững. Luôn nhớ nguyên tắc vàng:</i>
 
 🎯  <b>Chốt lãi đúng mục tiêu.</b>
@@ -69,7 +69,7 @@ INTRODUCTION_MESSAGES = [
 
 Cùng nhau, chúng ta sẽ đi trên con đường dài và an toàn!""",
     f"""<b>🤝Đ𝑶̂̀𝑵𝑮 𝑯𝑨̀𝑵𝑯 𝑪𝑼̀𝑵𝑮 𝑪𝑯𝑼𝒀𝑬̂𝑵 𝑮𝑰𝑨🤝</b>
-━━━━━━━━━━━━━━
+━━━━━━━━━━━
 <i>Bạn không hề đơn độc! Luôn có 𝓑𝓞𝓢𝓢 và đội ngũ hỗ trợ theo sát từng phiên. Hãy tin tưởng vào kinh nghiệm và tín hiệu được đưa ra.</i>
 
 Việc của bạn chỉ là:
@@ -90,7 +90,7 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
     ]
     link_text = "💎𝓝𝓗𝓐̂́𝓝 𝓥𝓐̀𝓞 𝓓𝓔̂̉ 𝓣𝓗𝓐𝓜 𝓖𝓘𝓐💎"
     header = f"🚨   <b>BÁO HIỆU CA {ca_number} - NGÀY {today_str}</b>   🚨"
-    separator = "━━━━━━━━━━━━━━━━━"
+    separator = "━━━━━━━━━━━━━━"
     return f"""
 <b><a href="{config.MAIN_GROUP_LINK}">️‍🔥 THÔNG BÁO KHẨN TỪ THƯ KÝ TIÊN ️‍🔥</a></b>
 {separator}
@@ -124,7 +124,7 @@ Hãy cùng nhau bắt đầu một ngày thật rực rỡ nhé! 🚀"""
 
 def create_good_night_message() -> str:
     return """🌙✨𝓒𝓗𝓤́𝓒 𝓒𝓐̉ 𝓝𝓗𝓐̀ 𝓝𝓖𝓤̉ 𝓝𝓖𝓞𝓝   
-━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━
 <i>Một ngày làm việc đã qua. Anh em hãy nghỉ ngơi thật tốt để lấy lại năng lượng cho những trận chiến ngày mai nhé.</i>
 
 Hẹn gặp lại cả nhà vào sáng mai! ❤️"""
@@ -134,14 +134,14 @@ def create_introduction_message() -> str:
 
 def create_capital_division_message() -> str:
     return """💰💰 𝓑𝓐̉𝓝𝓖 𝓒𝓗𝓘𝓐 𝓥𝓞̂́𝓝 𝓒𝓗𝓤𝓐̂̉𝓝 (𝓛𝓔̣̂𝓝𝓗 𝟏𝟎%) 
-━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━
 <i>Để đảm bảo an toàn và tối ưu lợi nhuận, anh em vui lòng tuân thủ nghiêm ngặt cách đi vốn theo bảng hướng dẫn.</i>
 
 ‼️  <b>LƯU Ý:</b> Vào lệnh đúng <b>10%</b> trên tổng số vốn của bạn.
 
-━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━
 💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @BossMinhHieuu ; @NGUYQUYNHTRAN</b></i>
-━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━
 
 <b>Kỷ luật là chìa khóa để chiến thắng!</b>"""
 
@@ -152,7 +152,7 @@ def create_schedule_message() -> str:
         "Thành công đến từ kỷ luật. Hãy tuân thủ đúng khung giờ!",
     ]
     return f"""⏰   <b>KHUNG GIỜ LÀM VIỆC MINH HIẾU BCR</b>   
-━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━
 {random.choice(messages)}
 
 𝕮𝖚̀𝖓𝖌 𝖓𝖍𝖆𝖚 𝖈𝖍𝖎𝖓𝖍 𝖕𝖍𝖚̣𝖈 𝟏𝟎𝟎 𝖈𝖆 𝖒𝖔̂̃𝖎 𝖓𝖌𝖆̀𝖞! 💪"""
