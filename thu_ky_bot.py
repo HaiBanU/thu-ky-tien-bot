@@ -140,7 +140,7 @@ def create_capital_division_message() -> str:
 ‼️  <b>LƯU Ý:</b> Vào lệnh đúng <b>10%</b> trên tổng số vốn của bạn.
 
 ━━━━━━━━━━━━━
-💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @BossMinhHieuu ; @NGUYQUYNHTRAN</b></i>
+💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @BossMinhHieuu ; @NGUYTRANHUY</b></i>
 ━━━━━━━━━━━━━
 
 <b>Kỷ luật là chìa khóa để chiến thắng!</b>"""
