@@ -108,7 +108,7 @@ def create_reminder_message(session_time: datetime, ca_number: int) -> str:
 <a href="{config.MAIN_GROUP_LINK}"><b>{link_text}</b></a>
 
 ━━━━━━━━━━━━━━━━
-💬  <i>Cần hỗ trợ hãy liên hệ <b>𝓑𝓞𝓢𝓢: @BossMinhHieuu</b></i>
+💬  <i>Cần hỗ trợ hãy liên hệ <b>@BossMinhHieuu ; @GIAHUY8697 </b></i>
 ━━━━━━━━━━━━━━━━
 
 🪄  <i>Lời nhắn nhủ: {random.choice(reminders)}</i>
